@@ -1,0 +1,24 @@
+{
+    "name": "chprof/hexlet-slim-example",
+    "description": "no",
+    "type": "project",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "credo-creative-studio-study",
+            "email": "credo.creative.creative.study@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^4.9",
+        "slim/psr7": "^1.5",
+        "slim/http": "^1.2",
+        "slim/php-view": "^3.1",
+        "php-di/php-di": "^6.3"
+    }
+}
