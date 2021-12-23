@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit user</title>
+</head>
+<body>
+  <?php
+    foreach ($flash as $name => $messages) :
+      switch ($name) {
+        case 'success':
+          $color = 'color: green';
+          break;
+          
+        default:
+          $color = 'color: red';
+          break;
+      }
+  ?>
+    <?php foreach ($messages as $message) : ?>
+      <strong style="<?= $color ?>"><?= $message; ?></strong>
+      <br><br>
+    <?php endforeach ?>
+  <?php endforeach; ?>
+  <form action="/users/<?= htmlspecialchars($user['id']) ?>" method="POST">
+    <input type="text" name="_METHOD" value="PATCH" hidden>
+    <label style="display: block; margin-bottom: 10px">
+      <span style="display: inline-block; width: 100px;">Nickname</span>
+      <input type="text" name="user[nickname]" value="<?= htmlspecialchars($user['nickname']) ?>">
+      <?php if (isset($errors['nickname'])) : ?>
+        <span style="color: red;"><?= $errors['nickname']; ?></span>
+      <?php endif; ?>
+    </label>
+    <label style="display: block; margin-bottom: 10px">
+      <span style="display: inline-block; width: 100px;">Email</span>
+      <input type="email" name="user[email]" value="<?= htmlspecialchars($user['email']) ?>">
+      <?php if (isset($errors['email'])) : ?>
+        <span style="color: red;"><?= $errors['email']; ?></span>
+      <?php endif; ?>
+    </label>
+    <button type="submit">Edit user</button>
+  </form>
+  <br>
+  <a href="/users/<?= htmlspecialchars($user['id']) ?>">Show user</a>
+</body>
+</html>

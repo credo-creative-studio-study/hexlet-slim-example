@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users base</title>
+</head>
+<body>
+  <?php
+    foreach ($flash as $name => $messages) :
+      switch ($name) {
+        case 'success':
+          $color = 'color: green';
+          break;
+          
+        default:
+          $color = 'color: red';
+          break;
+      }
+  ?>
+    <?php foreach ($messages as $message) : ?>
+      <strong style="<?= $color ?>"><?= $message; ?></strong>
+      <br><br>
+    <?php endforeach ?>
+  <?php endforeach; ?>
+  <table style="width: 100%; text-align: center;">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>nickname</th>
+        <th>email</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($users as ['id' => $id, 'nickname' => $nickname, 'email' => $email]) : ?>
+        <tr>
+          <td><?= $id; ?></td>
+          <td><a href="/users/<?= $id; ?>"><?= $nickname; ?></a></td>
+          <td><?= $email; ?></td>
+          <td>
+          <form action="/users/<?= $id ?>" method="post">
+            <input type="hidden" name="_METHOD" value="DELETE" hidden>
+            <input type="submit" value="Remove">
+          </form>
+          </td>
+        </tr>
+      <?php endforeach; ?>
+    </tbody>
+  </table>
+  <br>
+  <br>
+  <div style="display: flex; align-items: center; justify-content: center;">
+    <?php if ($pagination['page'] > 1) : ?>
+      <a
+        style="display: block; margin: 0 10px;"
+        href="<?= $router->urlFor('users', [], ['page' => $pagination['page'] - 1]) ?>"
+      >
+        Назад
+      </a>
+    <?php endif; ?>
+    <?php if ($pagination['page'] < $pagination['total_pages']) : ?>
+      <a
+        style="display: block; margin: 0 10px;"
+        href="<?= $router->urlFor('users', [], ['page' => $pagination['page'] + 1]) ?>"
+      >
+        Далее
+      </a>
+    <?php endif; ?>
+    <a
+      style="display: block; margin: 0 10px;"
+      href="/users/new"
+    >
+      Create user
+    </a>
+  </div>
+</body>
+</html>

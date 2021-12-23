@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<table style="width: 100%; text-align: center;">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>nickname</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><?= $user['id']; ?></td>
+        <td><?= $user['nickname']; ?></td>
+        <td><?= $user['email']; ?></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+<br>
+<a href="/users">To users</a>
+<a href="/users/<?= htmlspecialchars($user['id']) ?>/edit">Edit user</a>
+</html>

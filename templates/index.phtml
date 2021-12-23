@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home page</title>
+</head>
+<body>
+  <?php
+    foreach ($flash as $name => $messages) :
+      switch ($name) {
+        case 'success':
+          $color = 'color: green';
+          break;
+          
+        default:
+          $color = 'color: red';
+          break;
+      }
+  ?>
+    <?php foreach ($messages as $message) : ?>
+      <strong style="<?= $color ?>"><?= $message; ?></strong>
+      <br>
+    <?php endforeach ?>
+  <?php endforeach; ?>
+  <?php if (!$user['isAuthenticated']) : ?>
+    <form action="/session" method="post">
+      <label style="display:block; margin: 10px 0;">
+        <span style="display: block;">Имя *</span>
+        <input type="text" name="user[name]">
+      </label>
+      <label style="display:block; margin: 10px 0;">
+        <span style="display: block;">Пароль *</span>
+        <input type="password" name="user[password]">
+      </label>
+      <label style="display:block; margin: 10px 0;">
+        <button type="submit">Log in</button>
+      </label>
+    </form>
+  <?php else :  ?>
+    <h1>Hello <?= $user['name']; ?></h1>
+    <form action="/session" method="post">
+      <input type="hidden" name="_METHOD" value="DELETE" hidden>
+      <button type="submit"> Log out</button>
+    </form>
+  <?php endif;  ?>
+</body>
+</html>

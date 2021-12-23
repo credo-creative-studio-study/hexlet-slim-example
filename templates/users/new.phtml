@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create new user</title>
+</head>
+<body>
+  <form action="/users" method="POST">
+    <label style="display: block; margin-bottom: 10px">
+      <span style="display: inline-block; width: 100px;">Nickname</span>
+      <input type="text" name="user[nickname]" value="<?= htmlspecialchars($user['nickname']) ?>">
+      <?php if (isset($errors['nickname'])) : ?>
+        <span style="color: red;"><?= $errors['nickname']; ?></span>
+      <?php endif; ?>
+    </label>
+    <label style="display: block; margin-bottom: 10px">
+      <span style="display: inline-block; width: 100px;">Email</span>
+      <input type="email" name="user[email]" value="<?= htmlspecialchars($user['email']) ?>">
+      <?php if (isset($errors['email'])) : ?>
+        <span style="color: red;"><?= $errors['email']; ?></span>
+      <?php endif; ?>
+    </label>
+    <button type="submit">Create new user</button>
+  </form>
+  <br>
+  <a href="/users">Назад</a>
+</body>
+</html>
