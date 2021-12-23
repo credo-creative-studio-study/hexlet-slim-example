@@ -7,6 +7,7 @@ use Slim\Factory\AppFactory;
 use Slim\Middleware\MethodOverrideMiddleware;
 use DI\Container;
 use App\Validator;
+use Cowsayphp\Cow;
 
 session_start();
 
@@ -33,6 +34,12 @@ $app = AppFactory::create();
 $app->add(MethodOverrideMiddleware::class);
 
 // $users = json_decode(file_get_contents('./DB/db.json'), true);
+
+$app->get('/cowsay', function ($req, $res) use ($app) {
+    $app['monolog']->addDebug('cowsay');
+    return $res->write("<pre>" . Cow::say("Cool beans") . "</pre>");
+});
+
 $session_users = [
     ['name' => 'admin', 'passwordDigest' => hash('sha256', 'secret')],
     ['name' => 'mike', 'passwordDigest' => hash('sha256', 'superpass')],
